@@ -1,8 +1,10 @@
 server:
-  port: 8086
+  port: 8085
 spring:
   kafka:
-    producer:
-      bootstarp-servers: locahost:9092
+    consumer:
+      bootstarp-servers: localhost:9092
+      group-id: "my_group_id"
+      auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer

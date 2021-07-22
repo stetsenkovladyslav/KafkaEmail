@@ -6,9 +6,9 @@
 
     <parent>
         <groupId>com.example.kafka</groupId>
-        <artifactId>project</artifactId>
+        <artifactId>kafka</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath />
+
     </parent>
 
     <artifactId>producer</artifactId>
@@ -16,7 +16,7 @@
 
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>15</java.version>
     </properties>
 
     <dependencies>

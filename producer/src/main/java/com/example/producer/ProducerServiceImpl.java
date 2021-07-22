@@ -5,7 +5,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProducerServiceImpl implements ProducerService{
+public class ProducerServiceImpl implements ProducerService {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
 

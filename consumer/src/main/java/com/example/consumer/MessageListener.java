@@ -4,15 +4,13 @@ package com.example.consumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 
-@Component
+@Service
 public class MessageListener {
 
-    final private Logger log = (Logger) LoggerFactory.getLogger(getClass().getName());
-
-
+    final private Logger log = LoggerFactory.getLogger(getClass().getName());
 
     @KafkaListener(topics = "email-events", groupId = "consumer")
     public void listenEmailEvents(String message) {
