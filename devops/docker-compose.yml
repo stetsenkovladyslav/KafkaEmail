@@ -28,6 +28,8 @@ services:
 
   consumer:
     container_name: consumer
+    environment:
+      SPRING_KAFKA_CONSUMER_SERVER: kafka:9092
     depends_on:
       - kafka
     build:
@@ -38,6 +40,8 @@ services:
 
   producer:
     container_name: producer
+    environment:
+      SPRING_KAFKA_PRODUCER_SERVER: kafka:9092
     depends_on:
       - kafka
     build:

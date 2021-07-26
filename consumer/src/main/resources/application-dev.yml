@@ -3,7 +3,7 @@ server:
 spring:
   kafka:
     consumer:
-      bootstrap-servers: kafka:9092
+      bootstrap-servers: ${SPRING_KAFKA_CONSUMER_SERVER}
       group-id: "consumer"
       topic: "email-events"
       auto-offset-reset: earliest
