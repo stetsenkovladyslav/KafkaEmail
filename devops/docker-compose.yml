@@ -1,42 +1,46 @@
-version: '3'
-
+version: '2'
 services:
   zookeeper:
-    image: wurstmeister/zookeeper
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
     ports:
-      - 2181:2181
-    container_name: zookeeper
+      - 22181:2181
 
   kafka:
+    image: confluentinc/cp-kafka:latest
     depends_on:
       - zookeeper
-    image: wurstmeister/kafka
-    container_name: kafka
     ports:
-      - 9092:9092
+      - 29092:29092
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_CREATE_TOPIC: "email-events:1:3"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
 
   consumer:
-    environment:
-     SPRING_KAFKA_CONSUMER_SERVER: kafka:9092
     container_name: consumer
     depends_on:
       - kafka
     build:
-      ../consumer
+      context: ../consumer
     ports:
       - 8089:8089
 
+
   producer:
-    environment:
-      SPRING_KAFKA_PRODUCER_SERVER: kafka:9092
     container_name: producer
     depends_on:
       - kafka
     build:
-      ../producer
+     context:  ../producer
     ports:
       - 8090:8090

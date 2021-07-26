@@ -4,7 +4,8 @@ spring:
   kafka:
     consumer:
       bootstrap-servers: kafka:9092
-      group-id: "my_group_id"
+      group-id: "consumer"
+      topic: "email-events"
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
